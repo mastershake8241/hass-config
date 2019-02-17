@@ -21,7 +21,7 @@ sensor: !include sensors.yaml
 # Database to save all history stuff to
 recorder:
   purge_keep_days: 365
-  db_url: postgresql://hass:Gnu4life$@192.168.1.205:32771/hass
+  db_url: !secret database
 
 # Enables the frontend
 frontend:
@@ -81,7 +81,7 @@ system_health:
 #############
 weather:
   - platform: darksky
-    api_key: bf7a975b731cde6087df63bd9a3d7cb9
+    api_key: !secret wx_api_key
     mode: hourly
 
 
