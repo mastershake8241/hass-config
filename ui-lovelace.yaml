@@ -1,0 +1,631 @@
+#####################
+#    INCLUDES       #
+#####################
+resources:
+  - url: /local/plan-coordinates.js?v=1
+    type: js
+  # - url: /local/layout-card.js?v=1
+    # type: js
+  - url: /local/kiosk.js?v=1
+    type: js
+
+
+title: Our Home
+views:
+
+
+#######################################################################
+#                          MAIN SECTION                               #                     
+#######################################################################
+
+  - icon: mdi:home-assistant
+    cards:
+      # - type: iframe
+        # url: /local/index.html 
+        # aspect_ratio: 200%
+        # style:
+          # background-color: black;
+          # width: 100%
+      - type: weather-forecast
+        entity: weather.dark_sky
+
+      - type: entities
+        title: Doors
+        show_header_toggle: false
+        entities:
+          - binary_sensor.ecolink_door_window_sensor_sensor
+          - binary_sensor.neo_coolcam_door_window_detector_sensor
+          - sensor.pool_gate
+          - sensor.garage_door_sensor
+          - sensor.garage_door
+          - sensor.washer
+          - sensor.clothes_washer
+
+      - type: entities
+        title: Climate
+        show_header_toggle: false
+        entities:
+          - climate.thermostat
+          - sensor.masterbed_temp
+            # name: Masterbed
+          - sensor.kitchen_temp
+            # name: Kitchen
+          - sensor.garage_temp
+            # name: Garage
+          - sensor.attic_temp
+            # name: Attic
+          - sensor.serenity_temp
+          
+      - type: entities
+        title: Cover
+        show_header_toggle: false
+        entities:
+          - cover.garage_door
+
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - light.ge_14295_in_wall_smart_toggle_dimmer_level
+          - light.ge_26933_smart_motion_dimmer_level
+          - switch.lamp
+          - switch.ge_26931_smart_motion_switch_switch
+          
+      - type: entities
+        title: Switches
+        show_header_toggle: false
+        entities:
+          - switch.ge_14292_in_wall_smart_toggle_switch_switch
+          - input_boolean.bentley_heater
+          - input_boolean.google_tts_notify
+          # - switch.tv_off
+          # - switch.tv_vol_up
+          # - switch.tv_vol_down
+
+#######################################################################
+#                          TABLET SECTION                             #                     
+#######################################################################
+  - icon: mdi:tablet
+    id: kiosk_tablet
+    cards:
+      - type: iframe
+        url: /local/index.html 
+        
+
+      - type: weather-forecast
+        entity: weather.dark_sky
+
+      - type: entities
+        title: Doors
+        show_header_toggle: true
+        entities:
+          - binary_sensor.ecolink_doorwindow_sensor_sensor
+          - binary_sensor.neo_coolcam_doorwindow_detector_sensor
+          - sensor.garage_door_sensor
+
+      - type: entities
+        title: Climate
+        show_header_toggle: true
+        entities:
+          - climate.thermostat
+          - sensor.masterbed_temp
+            # name: Masterbed
+          - sensor.kitchen_temp
+            # name: Kitchen
+          - sensor.garage_temp
+            # name: Garage
+          - sensor.attic_temp
+            # name: Attic
+          - sensor.serenity_temp
+          
+      - type: entities
+        title: Cover
+        show_header_toggle: true
+        entities:
+          - cover.garage_door
+
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.ge_14295_inwall_smart_toggle_dimmer_level
+          - switch.ge_26931_smart_motion_switch_switch_3
+          - switch.lamp
+          - light.ge_26933_smart_motion_dimmer_level_2
+          
+      - type: entities
+        title: Switches
+        show_header_toggle: true
+        entities:
+          - switch.ge_14292_inwall_smart_toggle_switch_switch
+
+#######################################################################
+#                          LIGHTS SECTION                             #                     
+#######################################################################
+  - icon: mdi:lamp
+    title: Lights
+    cards:
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.ge_14295_inwall_smart_toggle_dimmer_level
+          - switch.ge_26931_smart_motion_switch_switch_3
+          - switch.lamp
+          - light.ge_26933_smart_motion_dimmer_level_2
+
+#######################################################################
+#                          SECURITY SECTION                           #                     
+#######################################################################
+  - icon: mdi:cctv
+    title: Security
+    cards:
+     # Entities card will take a list of entities and show their state.
+      - type: picture-glance
+        #title: Frontdoor
+        camera_image: camera.frontdoor
+        entities:
+          - sensor.kitchen_temp
+      - type: picture-glance
+        #title: Backdoor
+        camera_image: camera.backdoor
+        entities:
+          - sensor.kitchen_temp
+      - type: picture-glance
+        #title: Backdoor
+        camera_image: camera.driveway
+        entities:
+          - sensor.kitchen_temp
+      - type: picture-glance
+        #title: Bentley
+        camera_image: camera.bentley
+        entities:
+          - sensor.kitchen_temp
+      - type: picture-glance
+        #title: Bentley
+        camera_image: camera.serenity
+        entities:
+          - sensor.kitchen_temp
+          
+#######################################################################
+#                          MEDIA SECTION                              #                     
+#######################################################################
+  - icon: mdi:video-vintage
+    title: Media
+    cards:
+      - type: entities
+        title: Scripts
+        show_header_toggle: true
+        entities:
+          - switch.morning_movies
+     # Entities card will take a list of entities and show their state.
+      - type: media-control
+        entity: media_player.bentley
+
+      - type: media-control
+        entity: media_player.home
+
+      - type: media-control
+        entity: media_player.kitchen_speaker
+
+      - type: media-control
+        entity: media_player.living_room
+
+      - type: media-control
+        entity: media_player.living_room_2
+
+      - type: media-control
+        entity: media_player.master_bedroom_speaker
+
+      - type: media-control
+        entity: media_player.masterbed
+
+      - type: media-control
+        entity: media_player.googlehome5147
+   
+#######################################################################
+#                          WEATHER SECTION                            #                     
+#######################################################################
+  - icon: mdi:weather-cloudy
+    title: Weather
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: weather-forecast
+            entity: weather.dark_sky
+          - type: iframe
+            url: https://embed.windy.com/embed2.html
+            #aspect_ratio: 200%
+        
+#######################################################################
+#                          FLOORPLAN SECTION                          #                     
+#######################################################################
+  - icon: mdi:floor-plan
+    title: Floorplan
+    panel: true
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:plan-coordinates
+          - type: picture-elements
+            image: /local/floorplan1.png
+            elements:
+              ######################
+              #      LIVINGROOM    #
+              ######################
+              - type: image
+                entity: switch.ge_26931_smart_motion_switch_switch_3
+                tap_action: toggle
+                state_image:
+                  'on': /local/icons/lightbulb_on.png
+                  "off": /local/icons/lightbulb.png
+                style:
+                  top: 37%
+                  left: 23%
+                  width: 2.5%
+              - type: image
+                entity: binary_sensor.ecolink_doorwindow_sensor_sensor
+                state_image:
+                  "on": /local/icons/shield_outline1.png
+                  "off": /local/icons/shield_lock-outline.png
+                style:
+                  top: 33%
+                  left: 18%
+                  width: 3%
+              # - type: image
+                # tap_action: toggle
+                # entity: switch.ge_14292_inwall_smart_toggle_switch_switch
+                # state_image:
+                  # "on": /local/fan.gif 
+                  # "off": /local/fan_off3.png
+                # style:
+                  # top: 18%
+                  # left: 45%
+                  # width: 70px
+              - type: image
+                entity: binary_sensor.front_door_cam
+                state_image:
+                  "on": /local/icons/cctv.png 
+                  "off": /local/icons/cctv-red.png
+                style:
+                  top: 38%
+                  left: 13%
+                  width: 30px
+                  # transform: scaleX(-1)
+              - type: image
+                entity: binary_sensor.wifi_helo
+                # tap_action: toggle
+                state_image:
+                  "on": /local/icons/wifi.png
+                  "off": /local/icons/wifi-red.png
+                style:
+                  top: 39%
+                  left: 28%
+                  width: 30px
+              ######################
+              #      KITCHEN       #
+              ######################
+              - type: state-label
+                entity: sensor.kitchen_temp
+                style:
+                  top: 25%
+                  left: 62%
+                  color: white
+                  text-decoration: bold
+                  font-size: 150%
+              - type: image
+                entity: light.ge_14295_inwall_smart_toggle_dimmer_level
+                tap_action: toggle
+                state_image:
+                  "on": /local/icons/lightbulb_on.png
+                  "off": /local/icons/lightbulb.png
+                style:
+                  top: 14%
+                  left: 62%
+                  width: 2.5%
+              # - type: image
+                # tap_action: toggle
+                # entity: switch.ge_14292_inwall_smart_toggle_switch_switch
+                # state_image:
+                  # "on": /local/fan.gif 
+                  # "off": /local/fan_off3.png
+                # style:
+                  # top: 50%
+                  # left: 65%
+                  # width: 70px
+              ######################
+              #      HALLWAY       #
+              ######################
+              - type: state-label
+                entity: sensor.house_temp
+                style:
+                  top: 69%
+                  left: 55%
+                  color: white
+                  text-decoration: bold
+                  font-size: 150%
+              - type: image
+                entity: binary_sensor.wifi_athena
+                # tap_action: toggle
+                state_image:
+                  "on": /local/icons/wifi.png
+                  "off": /local/icons/wifi-red.png
+                style:
+                  top: 69%
+                  left: 51%
+                  width: 30px
+              # - type: image
+                # entity: 
+                # tap_action: toggle
+                # state_image:
+                  # "on": /local/icons/lightbulb_on.png
+                  # "off": /local/icons/lightbulb.png
+                # style:
+                  # top: 76%
+                  # left: 63%
+                  # width: 30px
+              ######################
+              #      MASTERBED     #
+              ######################
+              - type: image
+                tap_action: toggle
+                entity: switch.ge_14292_inwall_smart_toggle_switch_switch
+                state_image:
+                  "on": /local/fan.gif 
+                  "off": /local/fan_off3.png
+                style:
+                  top: 60%
+                  left: 85%
+                  width: 5.5%
+              - type: state-label
+                entity: sensor.masterbed_temp
+                style:
+                  top: 47%
+                  left: 86%
+                  color: white
+                  text-decoration: bold
+                  font-size: 150%
+              - type: image
+                entity: switch.lamp
+                tap_action: toggle
+                state_image:
+                  "on": /local/icons/lightbulb_on.png
+                  "off": /local/icons/lightbulb.png
+                style:
+                  top: 70%
+                  left: 93%
+                  width: 2.5%
+              ######################
+              #      BENTLEY       #
+              ######################    
+              # - type: image
+                # entity: light.ge_14295_inwall_smart_toggle_dimmer_level
+                # tap_action: toggle
+                # state_image:
+                  # "on": /local/icons/lightbulb_on.png
+                  # "off": /local/icons/lightbulb.png
+                # style:
+                  # top: 86%
+                  # left: 41%
+                  # width: 30px
+              # - type: image
+                # tap_action: toggle
+                # entity: switch.ge_14292_inwall_smart_toggle_switch_switch
+                # state_image:
+                  # "on": /local/fan.gif 
+                  # "off": /local/fan_off3.png
+                # style:
+                  # top: 88%
+                  # left: 46%
+                  # width: 50px
+              - type: image
+                entity: binary_sensor.bentley_cam
+                state_image:
+                  "on": /local/icons/cctv.png 
+                  "off": /local/icons/cctv-red.png
+                style:
+                  top: 93%
+                  left: 40%
+                  width: 30px
+                  transform: scaleX(-1)
+              ######################
+              #      SERENITY      #
+              ######################    
+              # - type: image
+                # entity: light.ge_14295_inwall_smart_toggle_dimmer_level
+                # tap_action: toggle
+                # state_image:
+                  # "on": /local/icons/lightbulb_on.png
+                  # "off": /local/icons/lightbulb.png
+                # style:
+                  # top: 86%
+                  # left: 56%
+                  # width: 30px
+              # - type: image
+                # tap_action: toggle
+                # entity: switch.ge_14292_inwall_smart_toggle_switch_switch
+                # state_image:
+                  # "on": /local/fan.gif 
+                  # "off": /local/fan_off3.png
+                # style:
+                  # top: 88%
+                  # left: 61%
+                  # width: 50px
+              # - type: image
+                # entity: 
+                # state_image:
+                  # "on": /local/cctv.gif 
+                  # "off": /local/cctv-red.png
+                # style:
+                  # top: 88%
+                  # left: 61%
+                  # width: 50px
+              - type: image
+                entity: binary_sensor.bentley_cam
+                state_image:
+                  "on": /local/icons/cctv.png 
+                  "off": /local/icons/cctv-red.png
+                style:
+                  top: 93%
+                  left: 55%
+                  width: 30px
+                  transform: scaleX(-1)
+              ######################
+              #      GARAGE        #
+              ######################
+              - type: state-label
+                entity: sensor.garage_temp
+                style:
+                  top: 60%
+                  left: 20%
+                  color: white
+                  text-decoration: bold
+                  font-size: 150%
+              - type: image
+                entity: binary_sensor.neo_coolcam_doorwindow_detector_sensor
+                state_image:
+                  "on": /local/icons/shield_outline1.png
+                  "off": /local/icons/shield_lock-outline.png
+                style:
+                  top: 70%
+                  left: 37%
+                  width: 3%
+              # - type: image
+                # entity: light.ge_14295_inwall_smart_toggle_dimmer_level
+                # tap_action: toggle
+                # state_image:
+                  # "on": /local/icons/lightbulb_on.png
+                  # "off": /local/icons/lightbulb.png
+                # style:
+                  # top: 70%
+                  # left: 21%
+                  # width: 3%
+              ######################
+              #      BACKYARD      #
+              ######################
+              - type: image
+                entity: binary_sensor.patio_cam
+                state_image:
+                  "on": /local/icons/cctv.png 
+                  "off": /local/icons/cctv-red.png
+                style:
+                  top: 35%
+                  left: 75%
+                  width: 30px
+                  transform: scaleX(-1)
+              ####################
+              #   END ENTITIES   #
+              ####################
+            style:
+              height: 400px
+              width: 25%
+              aspect_ratio: 50%
+
+#######################################################################
+#                          TEMPS SECTION                              #                     
+#######################################################################
+  - icon: mdi:thermometer
+    title: Climate
+    cards:
+     # Entities card will take a list of entities and show their state.
+      - type: entities
+        title: Temps
+        show_header_toggle: true
+        entities:
+          - climate.thermostat
+          - sensor.masterbed_temp
+            # name: Masterbed
+          - sensor.kitchen_temp
+            # name: Kitchen
+          - sensor.garage_temp
+            # name: Garage
+          - sensor.attic_temp
+            # name: Attic
+            
+      - type: entities
+        title: Humidity
+        show_header_toggle: true
+        entities:
+          - sensor.masterbed_humidity
+            # name: Masterbed
+          - sensor.kitchen_humidity
+            # name: Kitchen
+          - sensor.garage_humidity
+            # name: Garage
+          - sensor.attic_humidity
+            # name: Attic
+ 
+#######################################################################
+#                          BATTERY SECTION                            #                     
+#######################################################################
+  - icon: mdi:battery-60
+    title: Batteries
+    cards:
+     # Entities card will take a list of entities and show their state.
+      - type: entities
+        title: All Batteries
+        entities:
+          - sensor.front_door_battery
+          - sensor.garage_entry_battery 
+          
+#######################################################################
+#                          GRAPHS SECTION                             #                     
+#######################################################################
+  - icon: mdi:google-analytics
+    title: Graphs
+    cards:
+    #Entities card will take a list of entities and show their state.
+      - type: history-graph
+        title: Temps
+        hours_to_show: 120
+        refresh_interval: 3600
+        entities:
+          - entity: sensor.masterbed_temp
+            name: Masterbed
+          - entity: sensor.attic_temp
+            name: Attic
+          - entity: sensor.kitchen_temp
+            name: Kitchen
+          - entity: sensor.garage_temp
+            name: Garage
+          - entity: sensor.serenity_temp
+            name: Serenity
+
+#######################################################################
+#                          SYSTEMS SECTION                            #                     
+#######################################################################
+  - icon: mdi:gauge
+    title: System
+    cards:
+    # Entities card will take a list of entities and show their state.
+      - type: gauge
+        title: CPU
+        entity: sensor.processor_use
+        min: 0
+        max: 100
+        entities:
+          - binary_sensor.ping_binary_sensor
+          - binary_sensor.bentley_cam
+          - binary_sensor.front_door_cam
+          - binary_sensor.patio_cam
+          - binary_sensor.wifi_athena
+          - binary_sensor.wifi_helo
+          - binary_sensor.bentley_desktop
+
+#######################################################################
+#                          AUTOMATIONS SECTION                        #                     
+#######################################################################
+  - icon: mdi:settings
+    title: Automations
+    cards:
+      - type: entities
+        title: Automations
+        entities:
+          - input_boolean.bentley_heater
+          - input_boolean.google_tts_notify
+      - type: entities
+        title: OTA Switches
+        entities:
+          - switch.serenity_ota
+
+

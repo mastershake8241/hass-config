@@ -1,0 +1,186 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 32.0027
+  longitude: -110.7053
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Phoenix
+  # Customization file
+  customize: !include customize.yaml
+# SENSORS
+sensor: !include sensors.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Database to save all history stuff to
+recorder:
+  purge_keep_days: 365
+  db_url: postgresql://hass:Gnu4life$@192.168.1.205:32771/hass
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Enable lovelace ui config file
+lovelace:
+  mode: yaml
+
+# MQTT Server
+mqtt:
+  broker: 192.168.1.205
+  port: 1883
+  discovery: True
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+ # http:
+  # api_password: !secret api_password
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem
+  #   base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Allow diagnosing system problems
+system_health:
+
+#############
+#  WEATHER  #
+#############
+weather:
+  - platform: darksky
+    api_key: bf7a975b731cde6087df63bd9a3d7cb9
+    mode: hourly
+
+
+# Text to speech
+tts:
+  - platform: google
+    language: 'en'
+    cache: true
+    #cache_dir: /tmp/tts
+    time_memory: 300
+
+# Cloud
+cloud:
+
+# Zwave section
+zwave:
+  usb_path: /dev/ttyACM0
+  polling_interval: 30000
+  network_key: !secret network_key
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# Wink setup for the thermostat
+wink:
+
+# TP-Link outlet
+switch:
+  - platform: tplink
+    host: 192.168.1.187
+  - platform: mqtt
+    name: "morning movies"
+    command_topic: "roku/livingroom/morning"
+    payload_on: "on"
+    payload_off: "off"
+  - platform: mqtt
+    name: "serenity_ota"
+    command_topic: "serenity/ota_mode"
+    payload_on: "on"
+    payload_off: "off"
+
+##################################
+#  Automations & Input Booleans  #
+##################################
+input_boolean:
+  bentley_heater:
+    name: Bentley Heater
+    icon: mdi:radiator
+  google_tts_notify:
+    name: Google Home Notifications
+    icon: mdi:alert-octagon
+
+###########
+# CAMERAS #
+###########
+camera: !include cameras.yaml
+
+################
+# NETWORK PING #
+################
+binary_sensor:
+  - platform: ping
+    host: 192.168.1.205
+    sname: Server
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.38
+    name: front_door_cam
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.169
+    name: patio_cam
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.92
+    name: bentley_cam
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.86
+    name: wifi_athena
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.39
+    name: wifi_helo
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.183
+    name: bentley_desktop
+    count: 2
+    scan_interval: 300
+  - platform: ping
+    host: 192.168.1.175
+    name: driveway_cam
+    count: 2
+    scan_interval: 300

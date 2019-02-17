@@ -1,0 +1,8 @@
+binary_sensor.ecolink_door_window_sensor_sensor:
+  device_class: door
+binary_sensor.neo_coolcam_door_window_detector_sensor:
+  device_class: door
+sensor.clothes_washer:
+  icon: mdi:washing-machine
+sensor.pool_gate:
+  icon: mdi:door
