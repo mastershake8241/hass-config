@@ -51,17 +51,17 @@
       garage_door:
         friendly_name: Garage Door
         value_template: >
-          {% if 'state.sensor.garage_door_sensor' < '1.50' %}
+          {% if states('sensor.garage_door_sensor') < '1.50' %}
             Open
-          {% elif 'state.sensor.garage_door_sensor' > '1.50' %}
+          {% elif states('sensor.garage_door_sensor') > '0.50' %}
             Closed
           {% else %}
             n/a
           {% endif %}
         icon_template: >
-          {% if 'state.sensor.garage_door_sensor' < '1.50' %}
+          {% if states('sensor.garage_door_sensor') < '1.50' %}
             mdi:garage-open
-          {% elif 'state.sensor.garage_door_sensor' > '1.50' %}
+          {% elif states('sensor.garage_door_sensor') > '0.50' %}
             mdi:garage
           {% else %}
             mdi:help
@@ -72,9 +72,9 @@
       clothes_washer:
         friendly_name: Clothes Washer
         value_template: >
-          {% if 'state.sensor.sensor.washer' < '0.90' %}
+          {% if states('sensor.washer') < '0.90' %}
             Completed
-          {% elif 'state.sensor.sensor.washer' > '0.80' %}
+          {% elif states('sensor.washer') > '0.80' %}
             Off
           {% else %}
             n/a
@@ -85,7 +85,7 @@
       pool_gate:
         friendly_name: Pool Gate
         value_template: >
-         {%if is_state('sensor.hank_hkzw_dws01_door_window_sensor_access_control', '22') %}
+         {% if is_state('sensor.hank_hkzw_dws01_door_window_sensor_access_control', '22') %}
            Open
          {% elif is_state('sensor.hank_hkzw_dws01_door_window_sensor_access_control', '23') %}
            Closed
