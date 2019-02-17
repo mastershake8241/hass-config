@@ -8,13 +8,12 @@
 !*.md
 !www/
 !www/*
-!www/stylus
-!www/js
-!www/icons
-!www/css
-!www/custom_ui
-!www/coffeescript
-!www/css
+!www/stylus/*
+!www/js/*
+!www/icons/*
+!www/css/*
+!www/custom_ui/*
+!www/coffeescript/*
 # Ignore folders.
 .storage
 .cloud
