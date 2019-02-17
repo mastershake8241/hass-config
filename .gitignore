@@ -6,7 +6,15 @@
 !*.yaml
 !.gitignore
 !*.md
+!www/
 !www/*
+!www/stylus
+!www/js
+!www/icons
+!www/css
+!www/custom_ui
+!www/coffeescript
+!www/css
 # Ignore folders.
 .storage
 .cloud
