@@ -108,7 +108,7 @@ script: !include scripts.yaml
 
 # Wink setup for the thermostat
 wink:
-
+#
 # TP-Link outlet
 switch:
   - platform: tplink
